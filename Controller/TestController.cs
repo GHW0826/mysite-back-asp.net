@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using mysite_back_asp.net.Entity;
+using mysite_back_asp.net.Model;
+using mysite_back_asp.net.queries;
 using mysite_back_asp.net.Repository;
 using Newtonsoft.Json;
 using System.Text;
@@ -12,13 +15,30 @@ namespace mysite_back_asp.net.Controller
     [Route("api/[controller]")]
     public class TestController : ControllerBase
     {
+        private ISender _mediator;
+        protected ISender Mediator => _mediator ?? (_mediator = ServiceProviderServiceExtensions.GetRequiredService<ISender>(base.HttpContext.RequestServices));
+
+        private readonly ILogger<TestController> _logger;
         private readonly IDistributedCache _distributedCache;
         private readonly MysqlContext _context;
 
-        public TestController(IDistributedCache distributedCache, MysqlContext context)
+        public TestController(IDistributedCache distributedCache, MysqlContext context, ILogger<TestController> logger)
         {
             _distributedCache = distributedCache;
             _context = context;
+            _logger = logger;
+        }
+
+        [HttpGet("mediator/{id}")]
+        public async Task<IActionResult> GetGameMembers(string id, int param2)
+        {
+            TestModel result = await Mediator.Send(new TestQuery()
+            {
+                Pid = id,
+                Param2 = param2
+            });
+
+            return Ok(result);
         }
 
         [NonAction]
@@ -30,6 +50,7 @@ namespace mysite_back_asp.net.Controller
         [HttpGet("string")]
         public ActionResult<IEnumerable<string>> RegionSetSearch()
         {
+            _logger.LogInformation("get string");
             return new string[] { "value1", "value2" };
         }
 

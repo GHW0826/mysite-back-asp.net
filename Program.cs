@@ -1,5 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using mysite_back_asp.net;
+using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,12 @@ builder.Services.AddStackExchangeRedisCache(options =>
 builder.Services.AddRazorPages();
 
 builder.Services.AddControllers();
+
+
+
+// Use MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
 
 // swagger
 // builder.Services.AddMvcCore();
@@ -54,7 +63,15 @@ builder.Services.AddSwaggerGen(options =>
 });
 */
 
+// use serilog
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
+
 var app = builder.Build();
+
+
+// use serilog
+app.UseSerilogRequestLogging();
 
 // swagger ui, addtional Extension;
 app.UseExtension();
