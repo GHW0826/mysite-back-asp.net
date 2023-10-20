@@ -9,7 +9,7 @@ public class AuthorizationException : Exception
     /// <param name="message"></param>
     /// <param name="innerException"></param>
     [Obsolete("Code를 지정하는 생성자는 더 이상 사용할 수 없습니다.")]
-    public AuthorizationException(string code, string message, Exception innerException)
+    public AuthorizationException(string code, string message, Exception? innerException)
         : base(message, innerException)
     { }
 

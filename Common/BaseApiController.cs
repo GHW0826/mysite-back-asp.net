@@ -11,4 +11,11 @@ public class BaseApiController : ControllerBase
 {
     private ISender _mediator = null!;
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
+
+
+    [NonAction]
+    public new OkObjectResult Ok()
+    {
+        return Ok(null);
+    }
 }

@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using mysite_back_asp.net.Entity;
+﻿using Infrastructure.Entity;
+using Microsoft.EntityFrameworkCore;
 
-namespace mysite_back_asp.net.Cache
+namespace mysite_back_asp.net.Cache;
+
+public class RedisCache : DbContext
 {
-    public class RedisCache : DbContext
-    {
 
-        public DbSet<TestEntity> testEntities => Set<TestEntity>();
-    }
+    public DbSet<TestEntity> testEntities => Set<TestEntity>();
 }

@@ -1,5 +1,7 @@
 using mysite_back_asp.net;
 using Water.Common.AspNetCore.Extensions;
+using Infrastructure;
+using Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddWaterServiceCollectionExtenstion();
 
 var appconfig = builder.Configuration.GetSection("AppConfig").Get<AppConfig>();
 
+builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Add services to the container.
