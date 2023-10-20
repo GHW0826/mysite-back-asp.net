@@ -23,7 +23,7 @@ public static class WaterServiceCollectionExtension
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
         });
 
-
+/*
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
         {
@@ -38,7 +38,7 @@ public static class WaterServiceCollectionExtension
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("holywater"))
             };
         });
-
+*/
 
         return services;
     }

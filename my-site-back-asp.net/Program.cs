@@ -2,6 +2,7 @@ using mysite_back_asp.net;
 using Water.Common.AspNetCore.Extensions;
 using Infrastructure;
 using Application;
+using mysite_back_asp.net.SIgnalR.hub;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +23,16 @@ builder.Services.AddInfrastructure(builder.Configuration);
 // Add services to the container.
 builder.Services.AddControllers();
 
+
+// SignalR
+builder.Services.AddSignalR();
 var app = builder.Build();
+// SignalR
+app.MapHub<ChatHub>("/Chat");
+
 
 app.UseWaterApi();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
