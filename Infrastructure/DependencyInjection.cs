@@ -1,12 +1,18 @@
 ﻿
+using Application.Auth;
+using Application.Auth.Interface;
 using Application.Test;
 using Infrastructure.adapter;
 using Infrastructure.Auth;
+using Infrastructure.Helper;
 using Infrastructure.Repository;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Water.Common.Interfaces;
 
 namespace Infrastructure;
@@ -32,6 +38,11 @@ public static class DependencyInjection
             o => o.UseMySQL(configuration.GetConnectionString("MysqlContext") ?? throw new ArgumentNullException("MysqlContext Argument is null"))
         );
 
+        // AuthContext
+        services.AddDbContextPool<AuthContext>(
+            o => o.UseMySQL(configuration.GetConnectionString("MysqlContext") ?? throw new ArgumentNullException("AuthContext Argument is null"))
+        );
+
         // Redis
         services.AddStackExchangeRedisCache(options =>
         {
@@ -39,42 +50,43 @@ public static class DependencyInjection
             options.InstanceName = string.Empty;// "master";
         });
 
-
         #endregion
 
+
         services.AddScoped<ITestAdapter, TestAdapter>();
+        services.AddScoped<IAuthAdapter, AuthAdapter>();
 
 
         #region Auth
+        // JwtBearerOptions t;
 
-        services.AddScoped<IAuthUser, AuthUser>();
+        services.AddSingleton<ITokenHelper, JWTHelper>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
+            .AddJwtBearer(options =>
         {
-            options.Events = new JwtBearerEvents
+            options.RequireHttpsMetadata = true;
+        //    options.SaveToken = true;
+            options.TokenValidationParameters = new TokenValidationParameters
             {
-                OnMessageReceived = context =>
-                {
-                    var accessToken = context.Request.Cookies["EpochAccessToken"];
-                    if (!string.IsNullOrEmpty(accessToken))
-                        context.Token = accessToken;
-
-                    return Task.CompletedTask;
-                },
-                OnAuthenticationFailed = context =>
-                {
-                    return Task.CompletedTask;
-                },
-                OnTokenValidated = context =>
-                {
-                    return Task.CompletedTask;
-                },
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["Jwt:Issuer"],
+                ValidAudience = configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"] ?? throw new ArgumentNullException("Jwt Secretkey is null in appsetting"))),
+                ClockSkew = TimeSpan.Zero
             };
         });
 
-     //   services.ConfigureOptions<EpochJwtBearerOptions>();
-        
+        services.AddAuthorization(config =>
+        {
+            config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
+            config.AddPolicy(Policies.User, Policies.UserPolicy());
+            config.AddPolicy(Policies.UserName, Policies.UserNamePolicy());
+        });
+
         #endregion
 
 

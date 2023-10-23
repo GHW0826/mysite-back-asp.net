@@ -3,6 +3,7 @@ using Water.Common.AspNetCore.Extensions;
 using Infrastructure;
 using Application;
 using mysite_back_asp.net.SIgnalR.hub;
+using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,17 +23,22 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllers();
-
+builder.Services.AddHttpLogging(logging => {
+    logging.LoggingFields = HttpLoggingFields.All;
+    logging.RequestHeaders.Add("Referer");
+    logging.ResponseHeaders.Add("MyResponseHeader");
+});
 
 // SignalR
 builder.Services.AddSignalR();
 var app = builder.Build();
+
+app.UseHttpLogging();
+
 // SignalR
 app.MapHub<ChatHub>("/Chat");
 
-
 app.UseWaterApi();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -47,8 +53,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 // controller mapping
 app.MapControllers();
 

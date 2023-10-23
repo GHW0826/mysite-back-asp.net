@@ -3,9 +3,9 @@
     "MinimumLevel": {
       "Default": "Debug",
       "Override": {
-        "System": "Warning",
-        "Microsoft": "Warning",
-        "Microsoft.AspNetCore": "Warning",
+        "System": "Information",
+        "Microsoft": "Information",
+        "Microsoft.AspNetCore": "Information",
         "Microsoft.Hosting.Lifetime": "Information",
         "Microsoft.EntityFrameworkCore": "Information"
       }

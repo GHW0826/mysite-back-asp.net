@@ -10,6 +10,7 @@ namespace Infrastructure.adapter;
 public class TestAdapter : ITestAdapter
 {
     readonly ILogger<TestAdapter> _logger;
+
     public TestAdapter(ILogger<TestAdapter> logger)
     {
         _logger = logger;

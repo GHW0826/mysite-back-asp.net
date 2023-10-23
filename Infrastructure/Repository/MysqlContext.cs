@@ -9,6 +9,7 @@ namespace Infrastructure.Repository
         public MysqlContext(DbContextOptions<MysqlContext> options)
             : base(options)
         {}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }
