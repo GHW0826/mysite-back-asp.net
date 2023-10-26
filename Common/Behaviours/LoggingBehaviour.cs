@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel;
 
 namespace Common.Behaviours;
 
@@ -16,10 +18,18 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
     {
         string commandName = request.ToString() ?? "";
 
-        TResponse response = await next();
+        try
+        {
+            TResponse response = await next();
 
-        _logger.LogDebug("Response {commandName} {@request} {@response}", commandName, request, response);
-        
-        return response;
+            _logger.LogDebug("Response {commandName} {@request} {@response}", commandName, request, response);
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "ResponseException {exceptionType} {commandName} {@request}", TypeDescriptor.GetClassName(ex), commandName, request);
+            throw;
+        }
     }
 }

@@ -13,3 +13,5 @@ C:\Users\김성수\Documents\kss\mysite-back-asp.net\Application\obj\Debug\net7.
 C:\Users\김성수\Documents\kss\mysite-back-asp.net\Application\obj\Debug\net7.0\refint\Application.dll
 C:\Users\김성수\Documents\kss\mysite-back-asp.net\Application\obj\Debug\net7.0\Application.pdb
 C:\Users\김성수\Documents\kss\mysite-back-asp.net\Application\obj\Debug\net7.0\ref\Application.dll
+C:\Users\김성수\Documents\kss\mysite-back-asp.net\Application\bin\Debug\net7.0\Domain.dll
+C:\Users\김성수\Documents\kss\mysite-back-asp.net\Application\bin\Debug\net7.0\Domain.pdb

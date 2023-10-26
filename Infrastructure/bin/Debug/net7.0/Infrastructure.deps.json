@@ -1004,7 +1004,8 @@
       },
       "Application/1.0.0": {
         "dependencies": {
-          "Common": "1.0.0"
+          "Common": "1.0.0",
+          "Domain": "1.0.0"
         },
         "runtime": {
           "Application.dll": {}
@@ -1026,6 +1027,11 @@
         },
         "runtime": {
           "Common.dll": {}
+        }
+      },
+      "Domain/1.0.0": {
+        "runtime": {
+          "Domain.dll": {}
         }
       }
     }
@@ -1854,6 +1860,11 @@
       "sha512": ""
     },
     "Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -2,9 +2,9 @@
 
 namespace Application.Auth.Command;
 
-public class SignUpCommandValidator : AbstractValidator<SignUpCommand>
+public class SignInQueryValidator : AbstractValidator<SignUpCommand>
 {
-    public SignUpCommandValidator()
+    public SignInQueryValidator()
     { 
     }
 }

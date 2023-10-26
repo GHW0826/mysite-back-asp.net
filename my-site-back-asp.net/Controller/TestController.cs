@@ -1,6 +1,4 @@
-﻿using Application.Test.Model;
-using Application.Test.queries;
-using Infrastructure.Entity;
+﻿using Domain.Entity;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -21,25 +19,6 @@ public class TestController : BaseApiController
         _distributedCache = distributedCache;
         _context = context;
         _logger = logger;
-    }
-
-    [HttpGet("mediator/{id}")]
-    public async Task<IActionResult> GetGameMembers(string id, int param2)
-    {
-        TestModel result = await Mediator.Send(new TestQuery()
-        {
-            Pid = id,
-            Param2 = param2
-        });
-
-        return Ok(result);
-    }
-
-    [HttpGet("string")]
-    public ActionResult<IEnumerable<string>> RegionSetSearch()
-    {
-        _logger.LogInformation("get string");
-        return new string[] { "value1", "value2" };
     }
 
     [HttpGet("redis")]
@@ -70,20 +49,10 @@ public class TestController : BaseApiController
     }
 
 
-    /// <summary>
-    /// Deletes a specific TodoItem.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<ActionResult<TestEntity>> GetTodoItem(long id)
     {
         var todoItem = await _context.TestEntitys.FindAsync(id);
-
-        if (todoItem == null)
-        {
-            return NotFound();
-        }
 
         return todoItem;
     }

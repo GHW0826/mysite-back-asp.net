@@ -1,6 +1,6 @@
 ﻿using Application.Test;
+using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
-using Infrastructure.Entity;
 
 namespace Infrastructure.Repository
 {

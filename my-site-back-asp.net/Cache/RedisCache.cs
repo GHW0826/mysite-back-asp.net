@@ -1,4 +1,4 @@
-﻿using Infrastructure.Entity;
+﻿using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace mysite_back_asp.net.Cache;

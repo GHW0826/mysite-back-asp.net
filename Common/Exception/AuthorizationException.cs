@@ -19,7 +19,7 @@ public class AuthorizationException : Exception
     /// <param name="code"></param>
     /// <param name="message"></param>
     [Obsolete("Code를 지정하는 생성자는 더 이상 사용할 수 없습니다.")]
-    public AuthorizationException(string code, string message)
+    private AuthorizationException(string code, string message)
         : this(code, message, null)
     { }
 

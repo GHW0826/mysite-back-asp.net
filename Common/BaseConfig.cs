@@ -20,13 +20,13 @@ public class BaseConfig
         Real
     }
 
-    public string ApplicationName { get; set; }
+    public string ApplicationName { get; set; } = string.Empty;
 
     public Environment Env { get; set; }
 
-    public string KeyVault { get; set; }
+    public string KeyVault { get; set; } = string.Empty;
 
-    public string EnableCors { get; set; }
+    public string EnableCors { get; set; } = string.Empty;
 
-    public string TitleId { get; set; }
+    public string TitleId { get; set; } = string.Empty;
 }

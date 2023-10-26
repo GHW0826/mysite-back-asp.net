@@ -1,8 +1,9 @@
-﻿using Application.Auth.Model;
+﻿using Application.Auth.Command;
+using Application.Auth.Interface;
 using Application.Auth.Query;
 using Application.Test.queries;
 using Infrastructure.Auth;
-using Infrastructure.Entity;
+using Infrastructure.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Water.Common.AspNetCore;
@@ -17,40 +18,54 @@ public class AuthController : BaseApiController
 {
     private readonly ILogger<AuthController> _logger;
     private readonly IConfiguration _config;
+    private readonly ITokenHelper _tokenHelper;
 
 
-    public AuthController(ILogger<AuthController> logger, IConfiguration config)
+    public AuthController(ILogger<AuthController> logger, IConfiguration config, ITokenHelper tokenHelper)
     {
         _logger = logger;
         _config = config;
+        _tokenHelper = tokenHelper;
     }
-
-    /// <summary>
-    /// Sign Up Users
-    /// </summary>
-    /// <param name="email"></param>
-    /// <returns></returns>
-    /*
-    [HttpGet("{id}")]
-    public async Task<ActionResult<TestEntity>> GetUserInfo(string email)
-    {
-        var users = await _context.TestEntitys.FindAsync(email);
-
-        if (users == null)
-        {
-            return NotFound();
-        }
-
-        return users;
-    }
-    */
 
     [AllowAnonymous]
-    [HttpGet("{id}")]
-    public async Task<ActionResult<TestEntity>> GetUserInfo(string email)
+    [HttpPost("signup")]
+    public async Task<IActionResult> signUp([FromBody] AuthUser login)
     {
-        return new ActionResult<TestEntity>(Ok());
+        var result = await Mediator.Send(new SignUpCommand()
+        {
+            Email = login.Email,
+            Password = login.Password
+        });
+        return Ok(new
+        {
+            userDetails = result
+        });
     }
+
+    [AllowAnonymous]
+    [HttpPost("signup")]
+    public async Task<IActionResult> signin([FromBody] AuthUser login)
+    {
+        var result = await Mediator.Send(new SignInQuery()
+        {
+            email = login.Email,
+            password = login.Password
+        });
+
+        IActionResult response = Unauthorized();
+        if (result != null)
+        {
+            var jwtToken = _tokenHelper.GenerateJWTToken(login);
+            response = Ok(new
+            {
+                token = jwtToken,
+                user = result,
+            });
+        }
+        return response;
+    }
+
 
     /*
     public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
@@ -104,6 +119,8 @@ public class AuthController : BaseApiController
         */
         return response;
     }
+
+
 
     [HttpPost("test_auth")]
     [AllowAnonymous]

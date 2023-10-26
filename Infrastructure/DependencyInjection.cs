@@ -1,6 +1,7 @@
 ﻿
 using Application.Auth;
 using Application.Auth.Interface;
+using Application.Interface;
 using Application.Test;
 using Infrastructure.adapter;
 using Infrastructure.Auth;
@@ -9,10 +10,14 @@ using Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System.Text;
+using Water.Common;
 using Water.Common.Interfaces;
 
 namespace Infrastructure;
@@ -50,11 +55,17 @@ public static class DependencyInjection
             options.InstanceName = string.Empty;// "master";
         });
 
+        //services.AddDistributedMemoryCache();
+
         #endregion
-
-
+        services.AddScoped<IDatabaseAsync>(cfg =>
+        {
+            IConnectionMultiplexer multiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379, defaultDatabase=0");
+            return multiplexer.GetDatabase();
+        });
+        services.AddTransient<IDistributedLockContext, DistributedLockContext>();
+        services.AddScoped<IAuthDbContext, AuthContext>();
         services.AddScoped<ITestAdapter, TestAdapter>();
-        services.AddScoped<IAuthAdapter, AuthAdapter>();
 
 
         #region Auth

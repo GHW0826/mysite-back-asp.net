@@ -5,7 +5,7 @@ namespace Water.Common;
 
 public class ConfigOptions
 {
-    internal Type ExceptionFilter { get; set; }
+    internal Type? ExceptionFilter { get; set; }
 
     public void AddExceptionFilter<T>() where T : BaseExceptionFilterAttribute
     {

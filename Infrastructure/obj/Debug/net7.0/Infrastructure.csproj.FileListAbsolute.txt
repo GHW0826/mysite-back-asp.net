@@ -27,3 +27,5 @@ C:\Users\김성수\Documents\kss\mysite-back-asp.net\Infrastructure\bin\Debug\ne
 C:\Users\김성수\Documents\kss\mysite-back-asp.net\Infrastructure\bin\Debug\net7.0\Application.pdb
 C:\Users\김성수\Documents\kss\mysite-back-asp.net\Infrastructure\bin\Debug\net7.0\Common.pdb
 C:\Users\김성수\Documents\kss\mysite-back-asp.net\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.CopyComplete
+C:\Users\김성수\Documents\kss\mysite-back-asp.net\Infrastructure\bin\Debug\net7.0\Domain.dll
+C:\Users\김성수\Documents\kss\mysite-back-asp.net\Infrastructure\bin\Debug\net7.0\Domain.pdb
