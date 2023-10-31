@@ -68,7 +68,7 @@ public class NotFoundException : Exception
     /// </summary>
     /// <param name="target">찾을 수 없는 대상입니다.</param>
     /// <param name="innerException">현재 예외의 원인인 예외입니다.</param>
-    public NotFoundException(string target, Exception innerException)
+    public NotFoundException(string target, Exception? innerException)
         : base("대상을 찾을 수 없습니다.", innerException)
     {
         Target = target;

@@ -28,7 +28,7 @@ public class AuthorizationException : Exception
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>
-    public AuthorizationException(string message, Exception innerException)
+    public AuthorizationException(string message, Exception? innerException)
         : base(message, innerException)
     { }
 
@@ -44,7 +44,7 @@ public class AuthorizationException : Exception
     /// AuthorizationException 를 초기화 합니다.
     /// </summary>
     /// <param name="innerException"></param>
-    public AuthorizationException(Exception innerException)
+    public AuthorizationException(Exception? innerException)
         : this("인증정보가 없거나 정확하지 않습니다.", innerException)
     { }
 

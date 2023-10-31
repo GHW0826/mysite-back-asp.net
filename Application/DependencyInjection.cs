@@ -1,6 +1,9 @@
 ﻿
+using Application.Helper;
+using Application.Interface;
 using Common.Behaviours;
 using FluentValidation;
+using Infrastructure.Shard;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +19,9 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         //  services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
-       services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+
+        services.AddSingleton<ShardNumberHelper>();
 
         return services;
     }

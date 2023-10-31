@@ -4,6 +4,7 @@ using Infrastructure;
 using Application;
 using mysite_back_asp.net.SIgnalR.hub;
 using Microsoft.AspNetCore.HttpLogging;
+using Application.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +57,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 // controller mapping
 app.MapControllers();
 

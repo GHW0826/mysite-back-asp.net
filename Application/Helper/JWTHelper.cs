@@ -30,14 +30,14 @@ public class JWTHelper : ITokenHelper
     {
         var claims = new[]
 {
-            new Claim(JwtRegisteredClaimNames.Sub, userInfo.UserName),
-            new Claim(JwtRegisteredClaimNames.Name, userInfo.UserName),
-            new Claim(ClaimTypes.Name, userInfo.UserName),
+            new Claim(JwtRegisteredClaimNames.Sub, userInfo.Name),
+            new Claim(JwtRegisteredClaimNames.Name, userInfo.Name),
+            new Claim(ClaimTypes.Name, userInfo.Name),
             new Claim(ClaimTypes.Role, userInfo.UserRole),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 
-        var token = new JwtSecurityToken(
+        var token = new JwtSecurityToken (
             issuer: _config["Jwt:Issuer"],
             audience: _config["Jwt:Audience"],
             claims: claims,

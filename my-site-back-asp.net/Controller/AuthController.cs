@@ -34,8 +34,9 @@ public class AuthController : BaseApiController
     {
         var result = await Mediator.Send(new SignUpCommand()
         {
-            Email = login.Email,
-            Password = login.Password
+            email = login.Email,
+            password = login.Password,
+            name = login.Name
         });
         return Ok(new
         {
@@ -44,7 +45,7 @@ public class AuthController : BaseApiController
     }
 
     [AllowAnonymous]
-    [HttpPost("signup")]
+    [HttpPost("signin")]
     public async Task<IActionResult> signin([FromBody] AuthUser login)
     {
         var result = await Mediator.Send(new SignInQuery()

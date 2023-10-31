@@ -2,6 +2,6 @@
 
 namespace Application.Helper;
 
-internal class ResponseHelper
+public class ResponseHelper
 {
 }

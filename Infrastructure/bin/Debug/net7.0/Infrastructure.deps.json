@@ -10,7 +10,6 @@
         "dependencies": {
           "Application": "1.0.0",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "7.0.12",
-          "MySql.EntityFrameworkCore": "7.0.5",
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
@@ -1005,7 +1004,9 @@
       "Application/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
-          "Domain": "1.0.0"
+          "Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.5",
+          "MySql.EntityFrameworkCore": "7.0.5"
         },
         "runtime": {
           "Application.dll": {}
