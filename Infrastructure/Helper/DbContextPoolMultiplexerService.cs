@@ -14,7 +14,6 @@ public class DbContextPoolMultiplexerService<T> where T : DbContext
     private readonly IServiceProvider _serviceProvider;
     private readonly Dictionary<string, Type> _typeMappings = new Dictionary<string, Type>();
 
-
     internal DbContextPoolMultiplexerService(IServiceCollection services,
            Dictionary<string, Action<IServiceProvider, DbContextOptionsBuilder>> connectionDetails)
     {

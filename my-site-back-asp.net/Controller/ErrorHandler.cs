@@ -1,19 +1,17 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Water.Common.AspNetCore;
 
 namespace mysite_back_asp.net.Controller;
 
 [ApiController]
-public class ErrorHandler : ControllerBase
+public class ErrorHandler : BaseApiController
 {
     private readonly ILogger<ErrorHandler> _logger;
-    private readonly IConfiguration _config;
 
-
-    public ErrorHandler(ILogger<ErrorHandler> logger, IConfiguration config)
+    public ErrorHandler(ILogger<ErrorHandler> logger)
     {
         _logger = logger;
-        _config = config;
     }
 
     [Route("/error")]
@@ -24,5 +22,4 @@ public class ErrorHandler : ControllerBase
 
         return Problem(title: exceptionHandlerFeature.Error.Message);
     }
-
 }

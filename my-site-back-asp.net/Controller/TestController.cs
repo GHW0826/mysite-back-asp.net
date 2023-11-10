@@ -1,4 +1,5 @@
 ﻿using Domain.Entity;
+using Domain.Entity.Common;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -7,19 +8,33 @@ using Water.Common.AspNetCore;
 namespace mysite_back_asp.net.Controller;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 public class TestController : BaseApiController
 {
     private readonly ILogger<TestController> _logger;
     private readonly IDistributedCache _distributedCache;
-    private readonly MysqlContext _context;
+    private readonly TestContext _context;
 
-    public TestController(IDistributedCache distributedCache, MysqlContext context, ILogger<TestController> logger)
+    public TestController(IDistributedCache distributedCache, TestContext context, ILogger<TestController> logger)
     {
         _distributedCache = distributedCache;
         _context = context;
         _logger = logger;
     }
+
+
+    [HttpGet("test")]
+    public IActionResult test()
+    {
+        return Unauthorized();
+    }
+
+    [HttpGet("test2")]
+    public IActionResult test2()
+    {
+        return Unauthorized();
+    }
+
 
     [HttpGet("redis")]
     public async Task<IActionResult> GetAllCustomersUsingRedisCache()
@@ -53,7 +68,6 @@ public class TestController : BaseApiController
     public async Task<ActionResult<TestEntity>> GetTodoItem(long id)
     {
         var todoItem = await _context.TestEntitys.FindAsync(id);
-
         return todoItem;
     }
 

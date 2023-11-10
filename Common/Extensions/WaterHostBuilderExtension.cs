@@ -1,11 +1,8 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Water.Common.AspNetCore.Extensions;
 
@@ -36,7 +33,8 @@ public static class WaterHostBuilderExtension
         {
             //서비스 컨테이너에서 타입 T의 서비스 인스턴스를 가져옴.
             // 서비스는 T로 지정된 Configuration 클래스
-            var config = services.BuildServiceProvider().GetService<T>();
+            var config = services.BuildServiceProvider().GetService<T>()
+                ?? throw new Exception("GetService<T> excuted T is invalid in AddWaterHostBuilderExtension");
 
             // 지정된 configOptions와 인자로 받은 configAction 델리게이트를 호출.
             // 설정된 구성 값을 사용해 애플리케이션을 구성하고 설정.

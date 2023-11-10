@@ -22,7 +22,7 @@ public class DistributedLockContext : IDistributedLockContext
     public async Task<bool> AqurieLock(string key, string value)
     {
         bool flag = false;
-        flag = await _context.LockTakeAsync(key, value, new TimeSpan(0, 0, 1000));
+        flag = await _context.LockTakeAsync(key, value, new TimeSpan(0, 0, 100));
 
         return flag;
     }

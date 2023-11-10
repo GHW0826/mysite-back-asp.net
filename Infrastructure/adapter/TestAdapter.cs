@@ -16,7 +16,6 @@ public class TestAdapter : ITestAdapter
         _logger = logger;
     }
 
-
     public async Task<TestModel> GetTest()
     {
         return new TestModel

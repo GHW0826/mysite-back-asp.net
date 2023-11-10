@@ -1,162 +1,80 @@
 ﻿using Application.Auth.Command;
-using Application.Auth.Interface;
+using Application.Auth.Model;
 using Application.Auth.Query;
-using Application.Test.queries;
-using Infrastructure.Auth;
-using Infrastructure.Helper;
-using Microsoft.AspNetCore.Authorization;
+using Application.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Water.Common.AspNetCore;
 
 namespace mysite_back_asp.net.Controller;
 
-
-
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 public class AuthController : BaseApiController
 {
     private readonly ILogger<AuthController> _logger;
-    private readonly IConfiguration _config;
-    private readonly ITokenHelper _tokenHelper;
+    private readonly WebHelper _webHelper;
 
-
-    public AuthController(ILogger<AuthController> logger, IConfiguration config, ITokenHelper tokenHelper)
+    public AuthController(ILogger<AuthController> logger, WebHelper webHelper)
     {
         _logger = logger;
-        _config = config;
-        _tokenHelper = tokenHelper;
+        _webHelper = webHelper;
     }
 
-    [AllowAnonymous]
-    [HttpPost("signup")]
-    public async Task<IActionResult> signUp([FromBody] AuthUser login)
+    /// <summary>
+    /// 인증, 인증 성공시 토큰 로직 동작.
+    /// </summary>
+    /// <param name="requset"></param>
+    /// <returns></returns>
+    [HttpPost("authorize")]
+    public async Task<IActionResult> Authorize(AuthorizeRequestModel requset)
     {
-        var result = await Mediator.Send(new SignUpCommand()
+        var result = await Mediator.Send(new AuthorizeCommand()
         {
-            email = login.Email,
-            password = login.Password,
-            name = login.Name
-        });
-        return Ok(new
-        {
-            userDetails = result
-        });
-    }
-
-    [AllowAnonymous]
-    [HttpPost("signin")]
-    public async Task<IActionResult> signin([FromBody] AuthUser login)
-    {
-        var result = await Mediator.Send(new SignInQuery()
-        {
-            email = login.Email,
-            password = login.Password
+            email = requset.email,
+            password = requset.password
         });
 
-        IActionResult response = Unauthorized();
-        if (result != null)
-        {
-            var jwtToken = _tokenHelper.GenerateJWTToken(login);
-            response = Ok(new
-            {
-                token = jwtToken,
-                user = result,
-            });
-        }
-        return response;
+        // set refresh token in cookie
+        _webHelper.SetRefreshToken(result.refreshToken);
+
+        return success(result);
     }
 
-
-    /*
-    public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+    /// <summary>
+    /// 토큰 갱신
+    /// </summary>
+    /// <returns></returns>
+    [HttpPost("refresh/{id}")]
+    public async Task<IActionResult> RefreshToken(long id)
     {
-        var Key = Encoding.UTF8.GetBytes(_config["JWT:Key"]);
+        var token = await _webHelper.GetAccessTokenAsync();
+        // 만료되지 않은 상태에서 refresh 호출시 그대로 액세스 토큰 리턴
+        if (string.IsNullOrEmpty(token) == false)
+            return Ok(new { accessToken = token });
 
-        var tokenValidationParameters = new TokenValidationParameters
+        var requestAccessToken = _webHelper.GetAuthorizationHeaderToken();
+        var requestRefreshToken = _webHelper.GetRefreshToken();
+        var result = await Mediator.Send(new RefreshQuery()
         {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = false,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Key),
-            ClockSkew = TimeSpan.Zero
-        };
-
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
-        JwtSecurityToken jwtSecurityToken = securityToken as JwtSecurityToken;
-        if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-        {
-            throw new SecurityTokenException("Invalid token");
-        }
-
-        return principal;
-    }
-    */
-
-    [HttpPost]
-    [AllowAnonymous]
-    public IActionResult Login([FromBody] AuthUser login)
-    {
-        IActionResult response = Unauthorized();
-     //   var tokenString = GenerateJWTToken(login);
-     //   response = Ok(new
-     //   {
-    //        token = tokenString,
-     //       userDetails = login,
-     //   });
-        /*
-        AuthUser user = AuthenticateUser(login);
-        if (user != null)
-        {
-            var tokenString = GenerateJWTToken(login);
-            response = Ok(new
-            {
-                token = tokenString,
-                userDetails = login,
-            });
-        }
-        */
-        return response;
-    }
-
-
-
-    [HttpPost("test_auth")]
-    [AllowAnonymous]
-    public async Task<IActionResult> TestLogin([FromBody] AuthUser login)
-    {
-        var result = await Mediator.Send(new SignInQuery()
-        {
-            email = login.Email,
-            password = login.Password
+            id = id,
+            accessToken = requestAccessToken,
+            refreshToken = requestRefreshToken
         });
+        // set refresh token in cookie
+        _webHelper.SetRefreshToken(requestRefreshToken);
 
-        IActionResult response = Unauthorized();
-        /*
-        if (result != null)
-        {
-            var tokenString = GenerateJWTToken(login);
-            response = Ok(new
-            {
-                token = tokenString,
-                userDetails = login,
-            });
-        }
-        */
-        return response;
+        return success(result);
     }
 
-
-    [Authorize(Policy = Policies.UserName)]
-    [HttpGet("authenticated")]
-    public async Task<IActionResult> IsAuthenticated()
+    /// <summary>
+    /// 로그아웃
+    /// </summary>
+    /// <returns></returns>
+    [HttpPost("logout")]
+    public IActionResult Logout()
     {
-        TestQuery query2 = new();
-        // GetAuthenticatedQuery query = new();
-        var IsAuthenticated = await Mediator.Send(query2);
-
-        return Ok(new { Code = "0", IsAuthenticated = IsAuthenticated });
+        _webHelper.RemoveRefreshToken();
+        return Ok();
     }
+
 }

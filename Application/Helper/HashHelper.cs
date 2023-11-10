@@ -12,6 +12,8 @@ public class HashHelper
 {
     public static string EncryptPassword(string password)
     {
+        return password;
+        /*
         // divide by 8 to convert bits to bytes
         byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); 
 
@@ -25,5 +27,6 @@ public class HashHelper
             );
 
         return hashedPassword;
+        */
     }
 }

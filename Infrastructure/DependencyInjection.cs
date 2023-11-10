@@ -1,21 +1,16 @@
 ﻿
-using Application.Auth;
-using Application.Auth.Interface;
+using Application.Helper;
 using Application.Interface;
 using Application.Interface.Sharding;
 using Application.Test;
 using Infrastructure.adapter;
-using Infrastructure.Auth;
 using Infrastructure.Helper;
 using Infrastructure.Repository;
 using Infrastructure.Shard;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
-using System.Text;
 
 namespace Infrastructure;
 
@@ -27,11 +22,12 @@ public static class DependencyInjection
 
         #region Database
 
+        /*
         // Mysql
         services.AddDbContextPool<MysqlContext>(
             o => o.UseMySQL(configuration.GetConnectionString("MysqlContext:Shard0") ?? throw new ArgumentNullException("MysqlContext Argument is null"))
         );
-
+        */
 
         /*
         services.AddDbContextPool<AuthContext>(
@@ -54,34 +50,67 @@ public static class DependencyInjection
 
         #region ContextPool
 
-        // shard manager info
-        services.BeginRegisteringDbContextPoolMultiplexerService<ShardInfoContext>()
-            .AddConnectionDetails("auth:shardMange:0", 
-                (provider, builder) => builder.UseMySQL(
-                    configuration.GetConnectionString("MysqlContext:Shard0") ?? throw new ArgumentNullException("MysqlContext Argument is null"))
-                )
-            .AddConnectionDetails("auth:shardMange:1",
-                (provider, builder) => builder.UseMySQL(
-                    configuration.GetConnectionString("MysqlContext:Shard1") ?? throw new ArgumentNullException("MysqlContext Argument is null"))
-                )
-        .FinishRegisteringDbContextPoolMultiplexerService();
+        // Shard Info context
+        var connectionStrings = configuration?.GetSection("ConnectionStrings");
+        if (connectionStrings != null)
+        {
+            // shard manager info
+            var shardInfoShardCnt = connectionStrings.GetChildren()
+                        .Where(b => b.Key.StartsWith(ShardKeyHelper.SHARD_INFO_APPSETTING_KEY))
+                        .SelectMany(subSection => subSection.GetChildren())
+                        .ToList().Count();
+            var shardInfoContextPoolMS = services.BeginRegisteringDbContextPoolMultiplexerService<ShardInfoContext>();
+            for (int i = 0; i < shardInfoShardCnt; ++i)
+            {
+                var contextName = ShardKeyHelper.SHARD_INFO_CONTEXT_KEY + i.ToString();
+                var connectionString = configuration?.GetConnectionString(ShardKeyHelper.PREFIX_SHARD_INFO_CONNECTION_STRING + i.ToString())
+                            ?? throw new ArgumentNullException("ShardInfo Context Argument is null");
+                shardInfoContextPoolMS.AddConnectionDetails(
+                        contextName,
+                        (provider, builder) => builder.UseMySQL(connectionString));
+            }
+            shardInfoContextPoolMS.FinishRegisteringDbContextPoolMultiplexerService();
 
-        // auth
-        services.BeginRegisteringDbContextPoolMultiplexerService<AuthContext>()
-            .AddConnectionDetails("auth:shardMange:0",
-                (provider, builder) => builder.UseMySQL(
-                    configuration.GetConnectionString("MysqlContext:Shard0") ?? throw new ArgumentNullException("MysqlContext Argument is null"))
-                )
-            .AddConnectionDetails("auth:shardMange:1",
-                (provider, builder) => builder.UseMySQL(
-                    configuration.GetConnectionString("MysqlContext:Shard1") ?? throw new ArgumentNullException("MysqlContext Argument is null"))
-                )
-        .FinishRegisteringDbContextPoolMultiplexerService();
+            ///////////////////////////////////////////////////////////////////////
+            
+            // user context
+            var userShardCnt = connectionStrings.GetChildren()
+                        .Where(b => b.Key.StartsWith(ShardKeyHelper.USER_APPSETTING_KEY))
+                        .SelectMany(subSection => subSection.GetChildren())
+                        .ToList().Count();
+            var userContextPoolMS = services.BeginRegisteringDbContextPoolMultiplexerService<UserContext>();
+            for (int i = 0; i < userShardCnt; ++i)
+            {
+                var contextName = ShardKeyHelper.USER_CONTEXT_KEY + i.ToString();
+                var connectionString = configuration?.GetConnectionString(ShardKeyHelper.PREFIX_USER_CONNECTION_STRING + i.ToString())
+                            ?? throw new ArgumentNullException("User Context Argument is null");
+                userContextPoolMS.AddConnectionDetails(
+                    contextName,
+                    (provider, builder) => builder.UseMySQL(connectionString));
+            }
+            userContextPoolMS.FinishRegisteringDbContextPoolMultiplexerService();
 
+            // auth token context
+            var authTokenCnt = connectionStrings.GetChildren()
+                                .Where(b => b.Key.StartsWith(ShardKeyHelper.AUTH_TOKEN_APPSETTING_KEY))
+                                .SelectMany(subSection => subSection.GetChildren())
+                                .ToList().Count();
+            var authTokenContextPoolMS = services.BeginRegisteringDbContextPoolMultiplexerService<AuthTokenContext>();
+            for (int i = 0; i < authTokenCnt; ++i)
+            {
+                var contextName = ShardKeyHelper.AUTH_TOKEN_CONTEXT_KEY + i.ToString();
+                var connectionString = configuration?.GetConnectionString(ShardKeyHelper.PREFIX_AUTH_TOKEN_CONNECTION_STRING + i.ToString())
+                            ?? throw new ArgumentNullException("AuthTokenContext Argument is null");
+                authTokenContextPoolMS.AddConnectionDetails(
+                    contextName,
+                    (provider, builder) => builder.UseMySQL(connectionString));
+            }
+            authTokenContextPoolMS.FinishRegisteringDbContextPoolMultiplexerService();
 
-
-        services.AddSingleton<IShardContextPoolInterface, ShardContextPoolWarpper>();
-        services.AddSingleton<IAuthContextPoolInterface, AuthContextPoolWarpper>();
+            services.AddSingleton<IShardInfoContextPool,    ShardInfoContextPoolWarpper>();
+            services.AddSingleton<IUserContextPool,         UserContextPoolWarpper>();
+            services.AddSingleton<IAuthTokenContextPool,    AuthTokenContextPoolWarpper>();
+        }
 
         #endregion
 
@@ -95,39 +124,6 @@ public static class DependencyInjection
 
 
 
-        #region Auth
-
-        // JwtBearerOptions t;
-        services.AddSingleton<ITokenHelper, JWTHelper>();
-
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-        {
-            options.RequireHttpsMetadata = true;
-        //    options.SaveToken = true;
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = configuration["Jwt:Issuer"],
-                ValidAudience = configuration["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"] ?? throw new ArgumentNullException("Jwt Secretkey is null in appsetting"))),
-                ClockSkew = TimeSpan.Zero
-            };
-        });
-
-        services.AddAuthorization(config =>
-        {
-            config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
-            config.AddPolicy(Policies.User, Policies.UserPolicy());
-            config.AddPolicy(Policies.UserName, Policies.UserNamePolicy());
-        });
-
-        #endregion
-
-
         return services;
     }
 
@@ -137,9 +133,8 @@ public static class DependencyInjection
     /// <typeparam name="T">A type that extends DbContext.</typeparam>
     /// <param name="services">An instance of <see cref="IServiceCollection" />.</param>
     /// <returns>An instance of <see cref="DbContextPoolMultiplexerServiceBuilder{T}" />.</returns>
-    public static DbContextPoolMultiplexerServiceBuilder<T> BeginRegisteringDbContextPoolMultiplexerService<T>(
-        this IServiceCollection services
-        ) where T : DbContext
+    public static DbContextPoolMultiplexerServiceBuilder<T> BeginRegisteringDbContextPoolMultiplexerService<T>
+        (this IServiceCollection services) where T : DbContext
     {
         return new DbContextPoolMultiplexerServiceBuilder<T>(services);
     }

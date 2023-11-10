@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{94F54B70-4DFB-4B57-BE1F-3D2DCA07D049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{2947DFDE-A0E5-44CF-A960-A43AF3E5FADB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{2947DFDE-A0E5-44CF-A960-A43AF3E5FADB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{7A5F2104-A77F-45F0-ABFC-C2885E7A4053}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{7A5F2104-A77F-45F0-ABFC-C2885E7A4053}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitsTest", "UnitsTest\UnitsTest.csproj", "{222FAAB0-0874-4949-A326-6B0683B3129C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitsTest", "UnitsTest\UnitsTest.csproj", "{222FAAB0-0874-4949-A326-6B0683B3129C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
