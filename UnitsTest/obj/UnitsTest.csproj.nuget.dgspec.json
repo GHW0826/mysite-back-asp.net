@@ -391,10 +391,6 @@
               "target": "Package",
               "version": "[2.2.10, )"
             },
-            "Microsoft.Data.Sqlite.Core": {
-              "target": "Package",
-              "version": "[7.0.13, )"
-            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.6.0, )"
@@ -403,15 +399,21 @@
               "target": "Package",
               "version": "[4.20.69, )"
             },
-            "SQLite": {
-              "target": "Package",
-              "version": "[3.13.0, )"
-            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[3.2.0, )"
             },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.6.1, )"
+            },
             "xunit.extensibility.execution": {
+              "target": "Package",
+              "version": "[2.6.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[2.5.3, )"
             }
