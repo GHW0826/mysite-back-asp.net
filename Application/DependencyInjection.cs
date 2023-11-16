@@ -2,7 +2,6 @@
 using Application.Auth;
 using Application.Helper;
 using Application.Interface;
-using Common.Behaviours;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,9 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
-using AutoMapper;
 using Domain.Entity;
 using Application.Auth.Model;
+using SnowFall.Behaviours;
 
 namespace Application;
 

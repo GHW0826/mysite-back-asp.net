@@ -1,25 +1,25 @@
-using Water.Common.AspNetCore.Extensions;
-using Infrastructure;
+using SnowFall.Extensions;
+
 using Application;
 using mysite_back_asp.net.SIgnalR.hub;
 using Microsoft.AspNetCore.HttpLogging;
 using Application.Common;
+using Infra;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // water
-builder.Host.AddWaterHostBuilderExtension<AppConfig>((options, config) =>
+builder.Host.AddSnowFallApi<AppConfig>((options, config) =>
 {
     // options.AddApplicationInsightsInitializer<AppInsightsInitializer>();
     // options.AddApplicationInsightsFilter<AppInsightsFilter>();
     // options.AddExceptionFilter<ApiExceptionFilterAttribute>();
 });
-builder.Services.AddWaterServiceCollectionExtenstion();
 
 var appconfig = builder.Configuration.GetSection("AppConfig").Get<AppConfig>();
 
 builder.Services.AddApplication(builder.Configuration);
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfra(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllers();

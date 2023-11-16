@@ -6,7 +6,7 @@ using Application.User.Model;
 using Domain.Entity;
 using Domain.Entity.Common;
 using MediatR;
-using Water.Common.Exceptions;
+using SnowFall.Exceptions;
 
 namespace Application.User.Command;
 

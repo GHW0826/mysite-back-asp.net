@@ -1,9 +1,8 @@
 ﻿using Domain.Entity;
-using Domain.Entity.Common;
-using Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
-using Water.Common.AspNetCore;
+using SnowFall.AspNetCore;
+using Infra.Repository;
 
 namespace mysite_back_asp.net.Controller;
 

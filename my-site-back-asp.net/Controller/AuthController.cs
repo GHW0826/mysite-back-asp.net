@@ -3,7 +3,7 @@ using Application.Auth.Model;
 using Application.Auth.Query;
 using Application.Helper;
 using Microsoft.AspNetCore.Mvc;
-using Water.Common.AspNetCore;
+using SnowFall.AspNetCore;
 
 namespace mysite_back_asp.net.Controller;
 

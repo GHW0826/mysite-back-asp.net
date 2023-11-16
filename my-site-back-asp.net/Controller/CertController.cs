@@ -1,7 +1,7 @@
 ﻿using Application.User.Command;
 using Application.User.Model;
 using Microsoft.AspNetCore.Mvc;
-using Water.Common.AspNetCore;
+using SnowFall.AspNetCore;
 
 namespace mysite_back_asp.net.Controller;
 

@@ -1,12 +1,11 @@
 ﻿using Application.Auth.Model;
-using Application.Auth.Query;
 using Application.Helper;
 using Application.Interface.Sharding;
 using Application.Interface;
 using AutoMapper;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using Domain.Entity;
+using MediatR;
 
 namespace Application.Auth.Command;
 

@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "UnitsTest/1.0.0": {
         "dependencies": {
-          "Infrastructure": "1.0.0",
+          "Infra": "1.0.0",
           "MSTest.TestAdapter": "2.2.10",
           "MSTest.TestFramework": "2.2.10",
           "Microsoft.NET.Test.Sdk": "17.6.0",
@@ -17,7 +17,9 @@
           "xunit": "2.6.1",
           "xunit.extensibility.execution": "2.6.1",
           "xunit.runner.visualstudio": "2.5.3",
-          "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0"
+          "Infrastructure": "1.0.0.0",
+          "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0",
+          "SnowFall": "1.0.0.0"
         },
         "runtime": {
           "UnitsTest.dll": {}
@@ -2008,16 +2010,28 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
-          "Common": "1.0.0",
           "Domain": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "7.0.5",
-          "MySql.EntityFrameworkCore": "7.0.5"
+          "snowfall.common": "1.0.1-alpha"
         },
         "runtime": {
           "Application.dll": {}
         }
       },
-      "Common/1.0.0": {
+      "Domain/1.0.0": {
+        "runtime": {
+          "Domain.dll": {}
+        }
+      },
+      "Infra/1.0.0": {
+        "dependencies": {
+          "Application": "1.0.0",
+          "snowfall.infrastructure": "1.0.1-alpha"
+        },
+        "runtime": {
+          "Infra.dll": {}
+        }
+      },
+      "snowfall.common/1.0.1-alpha": {
         "dependencies": {
           "FluentValidation.DependencyInjectionExtensions": "11.7.1",
           "MediatR": "12.1.1",
@@ -2032,23 +2046,28 @@
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
-          "Common.dll": {}
+          "SnowFall.dll": {}
         }
       },
-      "Domain/1.0.0": {
-        "runtime": {
-          "Domain.dll": {}
-        }
-      },
-      "Infrastructure/1.0.0": {
+      "snowfall.infrastructure/1.0.1-alpha": {
         "dependencies": {
-          "Application": "1.0.0",
           "Dapper": "2.1.15",
+          "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "7.0.12",
+          "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
+          "MySql.EntityFrameworkCore": "7.0.5",
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "Infrastructure.dll": {}
+        }
+      },
+      "Infrastructure/1.0.0.0": {
+        "runtime": {
+          "Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions/14.0.0.0": {
@@ -2056,6 +2075,14 @@
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll": {
             "assemblyVersion": "14.0.0.0",
             "fileVersion": "14.0.7126.11"
+          }
+        }
+      },
+      "SnowFall/1.0.0.0": {
+        "runtime": {
+          "SnowFall.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -3486,22 +3513,37 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Common/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Infrastructure/1.0.0": {
+    "Infra/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
+    "snowfall.common/1.0.1-alpha": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "snowfall.infrastructure/1.0.1-alpha": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Infrastructure/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions/14.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SnowFall/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

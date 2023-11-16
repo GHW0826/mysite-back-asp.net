@@ -9,17 +9,10 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-	  <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.5" />
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Common\Common.csproj" />
 		<ProjectReference Include="..\Domain\Domain.csproj" />
+		<ProjectReference Include="..\SnowFall\SnowFall\SnowFall.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="User\Query\" />
-	</ItemGroup>
-
 </Project>

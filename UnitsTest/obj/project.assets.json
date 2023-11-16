@@ -3685,10 +3685,8 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
-          "Common": "1.0.0",
           "Domain": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "7.0.5",
-          "MySql.EntityFrameworkCore": "7.0.5"
+          "snowfall.common": "1.0.1-alpha"
         },
         "compile": {
           "bin/placeholder/Application.dll": {}
@@ -3697,7 +3695,31 @@
           "bin/placeholder/Application.dll": {}
         }
       },
-      "Common/1.0.0": {
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "Infra/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Application": "1.0.0",
+          "snowfall.infrastructure": "1.0.1-alpha"
+        },
+        "compile": {
+          "bin/placeholder/Infra.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infra.dll": {}
+        }
+      },
+      "snowfall.common/1.0.1-alpha": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
@@ -3714,36 +3736,28 @@
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "compile": {
-          "bin/placeholder/Common.dll": {}
+          "bin/placeholder/snowfall.common.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Common.dll": {}
+          "bin/placeholder/snowfall.common.dll": {}
         }
       },
-      "Domain/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "compile": {
-          "bin/placeholder/Domain.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Domain.dll": {}
-        }
-      },
-      "Infrastructure/1.0.0": {
+      "snowfall.infrastructure/1.0.1-alpha": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Application": "1.0.0",
           "Dapper": "2.1.15",
+          "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "7.0.12",
+          "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
+          "MySql.EntityFrameworkCore": "7.0.5",
           "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/snowfall.infrastructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/snowfall.infrastructure.dll": {}
         }
       }
     }
@@ -10806,25 +10820,30 @@
       "path": "../Application/Application.csproj",
       "msbuildProject": "../Application/Application.csproj"
     },
-    "Common/1.0.0": {
-      "type": "project",
-      "path": "../Common/Common.csproj",
-      "msbuildProject": "../Common/Common.csproj"
-    },
     "Domain/1.0.0": {
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
     },
-    "Infrastructure/1.0.0": {
+    "Infra/1.0.0": {
       "type": "project",
-      "path": "../Infrastructure/Infrastructure.csproj",
-      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
+      "path": "../Infra/Infra.csproj",
+      "msbuildProject": "../Infra/Infra.csproj"
+    },
+    "snowfall.common/1.0.1-alpha": {
+      "type": "project",
+      "path": "../SnowFall/SnowFall/SnowFall.csproj",
+      "msbuildProject": "../SnowFall/SnowFall/SnowFall.csproj"
+    },
+    "snowfall.infrastructure/1.0.1-alpha": {
+      "type": "project",
+      "path": "../SnowFall/Infrastructure/Infrastructure.csproj",
+      "msbuildProject": "../SnowFall/Infrastructure/Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "Infrastructure >= 1.0.0",
+      "Infra >= 1.0.0",
       "MSTest.TestAdapter >= 2.2.10",
       "MSTest.TestFramework >= 2.2.10",
       "Microsoft.NET.Test.Sdk >= 17.6.0",
@@ -10842,11 +10861,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite-back-asp.net\\UnitsTest\\UnitsTest.csproj",
+      "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj",
       "projectName": "UnitsTest",
-      "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite-back-asp.net\\UnitsTest\\UnitsTest.csproj",
+      "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj",
       "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite-back-asp.net\\UnitsTest\\obj\\",
+      "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -10869,8 +10888,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\김성수\\Documents\\kss\\mysite-back-asp.net\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite-back-asp.net\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj": {
+              "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj"
             }
           }
         }
@@ -10936,7 +10955,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }
