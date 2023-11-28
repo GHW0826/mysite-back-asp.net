@@ -2,6 +2,7 @@
 using System.Security.Claims;
 
 namespace mysite_back_asp.net.SIgnalR.hub;
+
 public class ChatHub : Hub
 {
     /*

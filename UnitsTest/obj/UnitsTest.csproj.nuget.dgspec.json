@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj": {}
+    "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\UnitsTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Application\\Application.csproj": {
+    "C:\\Users\\김성수\\Documents\\kss\\mysite\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Application\\Application.csproj",
+        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Application\\obj\\",
+        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -34,11 +34,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Domain\\Domain.csproj"
+              "C:\\Users\\김성수\\Documents\\kss\\mysite\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Domain\\Domain.csproj"
               },
-              "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\SnowFall\\SnowFall.csproj": {
-                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\SnowFall\\SnowFall.csproj"
+              "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\SnowFall\\SnowFall.csproj": {
+                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\SnowFall\\SnowFall.csproj"
               }
             }
           }
@@ -82,14 +82,14 @@
         }
       }
     },
-    "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Domain\\Domain.csproj": {
+    "C:\\Users\\김성수\\Documents\\kss\\mysite\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -143,14 +143,14 @@
         }
       }
     },
-    "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj": {
+    "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\Infra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj",
+        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\Infra.csproj",
         "projectName": "Infra",
-        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj",
+        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\Infra.csproj",
         "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\obj\\",
+        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -173,11 +173,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Application\\Application.csproj"
+              "C:\\Users\\김성수\\Documents\\kss\\mysite\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Application\\Application.csproj"
               },
-              "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -211,14 +211,14 @@
         }
       }
     },
-    "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.1-alpha",
       "restore": {
-        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\Infrastructure\\Infrastructure.csproj",
         "projectName": "snowfall.infrastructure",
-        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -298,14 +298,14 @@
         }
       }
     },
-    "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\SnowFall\\SnowFall.csproj": {
+    "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\SnowFall\\SnowFall.csproj": {
       "version": "1.0.1-alpha",
       "restore": {
-        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\SnowFall\\SnowFall.csproj",
+        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\SnowFall\\SnowFall.csproj",
         "projectName": "snowfall.common",
-        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\SnowFall\\SnowFall.csproj",
+        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\SnowFall\\SnowFall.csproj",
         "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\SnowFall\\SnowFall\\obj\\",
+        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\SnowFall\\SnowFall\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -405,14 +405,14 @@
         }
       }
     },
-    "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj": {
+    "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\UnitsTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj",
+        "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\UnitsTest.csproj",
         "projectName": "UnitsTest",
-        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj",
+        "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\UnitsTest.csproj",
         "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\obj\\",
+        "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -435,8 +435,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj": {
-                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj"
+              "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\Infra.csproj": {
+                "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\Infra.csproj"
               }
             }
           }

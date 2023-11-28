@@ -10861,11 +10861,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj",
+      "projectUniqueName": "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\UnitsTest.csproj",
       "projectName": "UnitsTest",
-      "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\UnitsTest.csproj",
+      "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\UnitsTest.csproj",
       "packagesPath": "C:\\Users\\김성수\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\UnitsTest\\obj\\",
+      "outputPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\UnitsTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -10888,8 +10888,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj": {
-              "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite2\\Infra\\Infra.csproj"
+            "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\Infra.csproj": {
+              "projectPath": "C:\\Users\\김성수\\Documents\\kss\\mysite\\Infra\\Infra.csproj"
             }
           }
         }
